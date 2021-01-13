@@ -63,6 +63,14 @@ public class Vehicle
     @Override
     public String toString()
     {
-        return "";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("Manufacturer: %s%n", getManufacturer()));
+        sb.append(String.format("Model: %s%n", getModel()));
+        sb.append(String.format("Color: %s%n", getColor()));
+        sb.append(String.format("License Plate: %s%n", getLicensePlate()));
+        sb.append(String.format("Owner: %s%n", getOwner()));
+
+        return sb.toString();
     }
 }
