@@ -27,13 +27,11 @@ public class CarDatabase
     //public Vehicle search(String licensePlate, boolean exact)
     public void search(String licensePlate, boolean exact)
     {
-        boolean exactSearchSuccess = false;
         if(exact)
         {
             try
             {
                 list.add(db.get(licensePlate).toString());
-                exactSearchSuccess = true;
             }
             catch (RuntimeException exception)
             {
@@ -54,30 +52,6 @@ public class CarDatabase
                 if (currentLicense.contains(licensePlate))
                 {
                     list.add(db.get(currentLicense).toString());
-                }
-            }
-        }
-
-        if (!exactSearchSuccess)
-        {
-            for (int i = 0; i < list.size(); i++)
-            {
-                try
-                {
-                    if (list.get(i) == null)
-                    {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("No car found");
-                        alert.setContentText(String.format("No car was found for your search query "));
-                        alert.showAndWait();
-                    }
-                }
-                catch (Exception exception)
-                {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("No car found");
-                    alert.setContentText(String.format("No car was found for your search query"));
-                    alert.showAndWait();
                 }
             }
         }
