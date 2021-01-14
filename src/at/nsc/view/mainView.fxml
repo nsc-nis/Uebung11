@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.nsc.controller.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.nsc.controller.MainController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <VBox.margin>
@@ -20,7 +20,7 @@
             <Image url="@../images/icon.png" />
          </image>
       </ImageView>
-      <TextField fx:id="textField_input" />
+      <TextField fx:id="textField_input" promptText="Search for a car with the license plate" />
       <HBox prefHeight="61.0" prefWidth="427.0">
          <children>
             <Button mnemonicParsing="false" onAction="#action_search" prefHeight="120.0" prefWidth="388.0" text="Search">

@@ -1,13 +1,10 @@
 package at.nsc.model;
 
-import at.nsc.controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 /**Car Database - Model
  * @author Niklas Schachl
@@ -15,8 +12,7 @@ import java.util.Iterator;
  */
 public class CarDatabase
 {
-    protected HashMap db = new HashMap();
-    private ArrayList<String> list = new ArrayList<String>();
+    protected HashMap<String, Vehicle> db = new HashMap();
 
 
     public CarDatabase()
@@ -25,13 +21,14 @@ public class CarDatabase
     }
 
     //public Vehicle search(String licensePlate, boolean exact)
-    public void search(String licensePlate, boolean exact)
+    public List<Vehicle> search(String licensePlate, boolean exact)
     {
+        List<Vehicle> list = new LinkedList<Vehicle>();
         if(exact)
         {
             try
             {
-                list.add(db.get(licensePlate).toString());
+                list.add(db.get(licensePlate));
             }
             catch (RuntimeException exception)
             {
@@ -51,18 +48,17 @@ public class CarDatabase
 
                 if (currentLicense.contains(licensePlate))
                 {
-                    list.add(db.get(currentLicense).toString());
+                    list.add(db.get(currentLicense));
                 }
             }
         }
+        return list;
     }
 
-    public ObservableList<String> getObservableList() {
-        return FXCollections.observableList(list);
+    public ObservableList<Vehicle> getObservableList(List<Vehicle> vehicleList) {
+        return FXCollections.observableList(vehicleList);
     }
-
-    public void clear(){list.clear();}
-
+    
     private void generate()
     {
         MagicGenerator generator = new MagicGenerator();

@@ -1,6 +1,7 @@
 package at.nsc.controller;
 
 import at.nsc.model.CarDatabase;
+import at.nsc.model.Vehicle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,13 +20,13 @@ import java.util.ResourceBundle;
  * @author Niklas Schachl
  * @version 1.0, 7.1.2021
  */
-public class Controller implements Initializable
+public class MainController implements Initializable
 {
     private Stage stage;
     private CarDatabase database = new CarDatabase();
 
     @FXML
-    private ListView<String> listView_signs;
+    private ListView<Vehicle> listView_signs;
 
     @FXML
     private TextField textField_input;
@@ -34,11 +35,11 @@ public class Controller implements Initializable
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(Controller.class.getResource("/at/nsc/view/view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("/at/nsc/view/mainView.fxml"));
             Parent root = fxmlLoader.load();
 
             //get controller which is connected to this fxml file
-            Controller ctrl = fxmlLoader.getController();
+            MainController ctrl = fxmlLoader.getController();
             ctrl.stage = stage;
 
             stage.getIcons().add(new Image("/at/nsc/images/icon.png"));
@@ -60,26 +61,23 @@ public class Controller implements Initializable
     @FXML
     private void action_search()
     {
-        clear();
-        database.search(textField_input.getText(), false);
+       displayResult(false);
     }
 
     @FXML
     private void action_exact()
     {
-        clear();
-        database.search(textField_input.getText(), true);
+        displayResult(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        listView_signs.setItems(database.getObservableList());
+        //listView_signs.setItems(null);
     }
 
-    private void clear()
+    private void displayResult(boolean exact)
     {
-        database.clear();
-        listView_signs.setItems(database.getObservableList());
+        listView_signs.setItems(database.getObservableList(database.search(textField_input.getText(), exact)));
     }
 }
